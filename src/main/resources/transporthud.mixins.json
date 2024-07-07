@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "me.lukasabbe.transporthud.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+  ],
+  "client": [
+    "MinecraftHudMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

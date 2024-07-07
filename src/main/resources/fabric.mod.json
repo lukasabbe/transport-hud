@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "transporthud",
+  "version": "${version}",
+  "name": "TransportHud",
+  "description": "",
+  "authors": [],
+  "contact": {
+    "repo": "https://github.com/lukasabbe/TransportHud"
+  },
+  "license": "All-Rights-Reserved",
+  "icon": "assets/transporthud/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "me.lukasabbe.transporthud.TransportHud"
+    ]
+  },
+  "mixins": [
+    "transporthud.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}

@@ -1,6 +1,5 @@
 package me.lukasabbe.transporthud;
 
-import me.lukasabbe.transporthud.data.ElytraData;
 import me.lukasabbe.transporthud.huds.ElytraHUD;
 import net.fabricmc.api.ClientModInitializer;
 import net.minecraft.client.MinecraftClient;

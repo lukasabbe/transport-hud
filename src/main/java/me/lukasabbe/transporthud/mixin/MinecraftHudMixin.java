@@ -12,12 +12,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(InGameHud.class)
 public class MinecraftHudMixin {
     @Inject(
-            method = "render",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/LayeredDrawer;render(Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/client/render/RenderTickCounter;)V")
+        method = "render", at= @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;enableDepthTest()V")
     )
     public void render(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci){
+
         if(TransportHud.hud.data.isFlying){
-            TransportHud.hud.render(context,tickCounter);
+            TransportHud.hud.elytraHudRenderer(context,tickCounter);
         }
+
     }
 }

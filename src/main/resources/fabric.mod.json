@@ -8,7 +8,7 @@
   "contact": {
     "repo": "https://github.com/lukasabbe/TransportHud"
   },
-  "license": "All-Rights-Reserved",
+  "license": "MIT",
   "icon": "assets/transporthud/icon.png",
   "environment": "client",
   "entrypoints": {

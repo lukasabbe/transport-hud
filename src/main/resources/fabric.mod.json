@@ -4,7 +4,7 @@
   "version": "${version}",
   "name": "TransportHud",
   "description": "",
-  "authors": [],
+  "authors": ["Lukasabbe"],
   "contact": {
     "repo": "https://github.com/lukasabbe/TransportHud"
   },
@@ -22,6 +22,7 @@
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
-    "minecraft": "${minecraft_version}"
+    "minecraft": "${minecraft_version}",
+    "java": ">=21"
   }
 }

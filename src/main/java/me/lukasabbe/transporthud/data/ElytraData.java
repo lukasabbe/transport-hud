@@ -3,9 +3,12 @@ package me.lukasabbe.transporthud.data;
 import me.lukasabbe.transporthud.TransportHud;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.item.CompassAnglePredicateProvider;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.item.Items;
+import net.minecraft.server.network.DebugInfoSender;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
 public class ElytraData {
@@ -15,7 +18,7 @@ public class ElytraData {
     public float speed;
     public Vec3d postion;
     public float pitch;
-    public float yaw;
+    public double yaw;
 
     public ElytraData(MinecraftClient client){
         if(client == null)
@@ -39,8 +42,18 @@ public class ElytraData {
             isFlying = true;
             speed = (float) (player.getVelocity().length() * 20d);
             postion = player.getPos();
-            yaw = player.getYaw();
             pitch = player.getPitch();
+            float playersYaw = player.getYaw()+90;
+            if(playersYaw > 360){
+                int yawRotations = (int) Math.floor(playersYaw /360);
+                yaw = playersYaw - (360*yawRotations);
+            } else if (playersYaw < 0) {
+                int yawRotations = (int) Math.floor(Math.abs( playersYaw) /360) + 1;
+                yaw = yawRotations*360+playersYaw;
+            }else{
+                yaw = playersYaw;
+            }
+
         }else counter++;
     }
 }

@@ -7,7 +7,6 @@ import me.lukasabbe.transporthud.data.ElytraData;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
@@ -25,14 +24,14 @@ public class ElytraHUD implements HudRenderCallback {
     }
 
     @Override
-    public void onHudRender(DrawContext drawContext, RenderTickCounter tickCounter) {
+    public void onHudRender(DrawContext drawContext, float tickCounter) {
         if(!Config.isHudOn) return;
         if (!data.isFlying) return;
         MinecraftClient client = MinecraftClient.getInstance();
         if(client == null) return;
         int screenWidth = client.getWindow().getScaledWidth();
         int screenHeight = client.getWindow().getScaledHeight();
-        displaySpeed = MathHelper.lerp(tickCounter.getTickDelta(true), displaySpeed, data.speed);
+        displaySpeed = MathHelper.lerp(tickCounter, displaySpeed, data.speed);
 
         int x = screenWidth / 2;
         int y = screenHeight - 25;

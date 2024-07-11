@@ -12,6 +12,7 @@ public class TransportHud implements ClientModInitializer {
     public static Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
     @Override
     public void onInitializeClient() {
+        Config.load();
         HudRenderCallback.EVENT.register(new ElytraHUD(MinecraftClient.getInstance()));
     }
 }

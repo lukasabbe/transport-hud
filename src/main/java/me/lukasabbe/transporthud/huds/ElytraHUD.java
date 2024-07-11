@@ -1,6 +1,7 @@
 package me.lukasabbe.transporthud.huds;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import me.lukasabbe.transporthud.Config;
 import me.lukasabbe.transporthud.TransportHud;
 import me.lukasabbe.transporthud.data.ElytraData;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
@@ -25,6 +26,7 @@ public class ElytraHUD implements HudRenderCallback {
 
     @Override
     public void onHudRender(DrawContext drawContext, RenderTickCounter tickCounter) {
+        if(!Config.isHudOn) return;
         if (!data.isFlying) return;
         MinecraftClient client = MinecraftClient.getInstance();
         if(client == null) return;

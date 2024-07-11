@@ -13,4 +13,4 @@ And to the side of that, you have arrows to display if you go up or down.
 
 To the right of that you have a compass
 
-# [Download](https://github.com/lukasabbe/transport-hud/releases/tag/1.21)
+# [Download](https://modrinth.com/mod/simpleelytrahud/version/1.0.1)

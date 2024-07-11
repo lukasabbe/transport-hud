@@ -42,11 +42,11 @@ public class ElytraHUD implements HudRenderCallback {
         drawContext.drawTexture(elytraHudAssets,x-50,y-60,2,44,100,36);
 
         type(drawContext,String.format("%d°",(int)data.pitch),x-45, y-55,0xFFFFFF,client);
-        type(drawContext,Math.round(displaySpeed*10.0)/10.0 + "km/m",x-45, y-45,0xFFFFFF,client);
+        type(drawContext,Math.round(displaySpeed*10.0)/10.0 + "km/h",x-45, y-45,0xFFFFFF,client);
         final Vec3d playerPos = client.player.getPos();
         type(drawContext,String.format("%d:%d:%d", (int)playerPos.x, (int)playerPos.y, (int)playerPos.z),x-45, y-35,0xFFFFFF,client);
 
-        drawArrows(drawContext, data.pitch < 0, x-5, y-53);
+        drawArrows(drawContext, data.pitch < 0, x+5, y-52);
         //compass
         drawContext.drawTexture(elytraHudAssets,x+14,y-58,44,1,29,31);
         drawCompassArrow(drawContext,x+28,y-43);

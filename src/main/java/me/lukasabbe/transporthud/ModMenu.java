@@ -16,7 +16,11 @@ public class ModMenu implements ModMenuApi {
             ConfigEntryBuilder entryBuilder = builder.entryBuilder();
             builder.getOrCreateCategory(Text.translatable("transporthud.config.cat"))
                     .addEntry(entryBuilder.startBooleanToggle(Text.translatable("transporthud.option.hud.enabled"),Config.isHudOn)
-                            .setDefaultValue(true).setSaveConsumer(newVal->Config.isHudOn = newVal).build());
+                            .setDefaultValue(true).setSaveConsumer(newVal->Config.isHudOn = newVal).build())
+                    .addEntry(entryBuilder.startIntField(Text.translatable("transporthud.option.delay.text"),Config.hudDelay)
+                            .setDefaultValue(2).setSaveConsumer(newVal -> Config.hudDelay = newVal).build())
+                    .addEntry(entryBuilder.startBooleanToggle(Text.translatable("transporthud.option.elytraDmgLvl.info"),Config.isElytraDmgStatusOn)
+                            .setDefaultValue(true).setSaveConsumer(newVal -> Config.isElytraDmgStatusOn = newVal).build());
             builder.setSavingRunnable(Config::save);
             return builder.build();
         };

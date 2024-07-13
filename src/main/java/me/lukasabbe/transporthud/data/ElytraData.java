@@ -1,5 +1,6 @@
 package me.lukasabbe.transporthud.data;
 
+import me.lukasabbe.transporthud.Config;
 import me.lukasabbe.transporthud.TransportHud;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.MinecraftClient;
@@ -19,6 +20,9 @@ public class ElytraData {
     public Vec3d postion;
     public float pitch;
     public double yaw;
+    public float elytraStatus;
+    public float maxElytraStatus;
+    public int elytraDmgColor;
 
     public ElytraData(MinecraftClient client){
         if(client == null)
@@ -37,13 +41,16 @@ public class ElytraData {
             isFlying=false;
             return;
         }
-        //over 2 seconds in the air
-        if(counter > 40){
+        //Hud delay is in sec times ticks. 20 ticks in 1 sec
+        if(counter > Config.hudDelay * 20){
             isFlying = true;
             speed = (float) (player.getVelocity().length() * 20d);
             postion = player.getPos();
             pitch = player.getPitch();
             float playersYaw = player.getYaw()+90;
+            elytraStatus = player.getInventory().getArmorStack(2).getDamage();
+            maxElytraStatus = player.getInventory().getArmorStack(2).getMaxDamage();
+            elytraDmgColor = player.getInventory().getArmorStack(2).getItemBarColor();
             if(playersYaw > 360){
                 int yawRotations = (int) Math.floor(playersYaw /360);
                 yaw = playersYaw - (360*yawRotations);

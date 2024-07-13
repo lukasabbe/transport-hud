@@ -2,5 +2,7 @@
   "transporthud.config.title": "Elytra HUD options",
   "transporthud.option.hud.enabled": "Enabled",
   "transporthud.option.hud.info": "Turn off or on HUD",
-  "transporthud.config.cat": "Category"
+  "transporthud.config.cat": "Category",
+  "transporthud.option.delay.text": "Delay for elytra HUD displaying",
+  "transporthud.option.elytraDmgLvl.info": "Toggle if you want to see elytras damages lvl"
 }

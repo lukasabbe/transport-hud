@@ -9,7 +9,11 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.ColorHelper;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
@@ -27,8 +31,9 @@ public class ElytraHUD implements HudRenderCallback {
     @Override
     public void onHudRender(DrawContext drawContext, RenderTickCounter tickCounter) {
         if(!Config.isHudOn) return;
-        if (!data.isFlying) return;
+        if(!data.isFlying) return;
         MinecraftClient client = MinecraftClient.getInstance();
+        if(client.options.hudHidden) return;
         if(client == null) return;
         int screenWidth = client.getWindow().getScaledWidth();
         int screenHeight = client.getWindow().getScaledHeight();
@@ -52,6 +57,10 @@ public class ElytraHUD implements HudRenderCallback {
         //compass
         drawContext.drawTexture(elytraHudAssets,x+14,y-58,44,1,29,31);
         drawCompassArrow(drawContext,x+28,y-43);
+        //DMG level
+        if(Config.isElytraDmgStatusOn)
+            drawElytraStatus(drawContext, x-2, y-31,17);
+
         RenderSystem.disableBlend();
     }
 
@@ -71,6 +80,24 @@ public class ElytraHUD implements HudRenderCallback {
             int y = (int) (i*Math.sin(Math.toRadians(data.yaw)) + posY);
             context.drawTexture(elytraHudAssets,x,y,77,12,1,1);
         }
+    }
+    private void drawElytraStatus(DrawContext context, int posX, int posY, int size){
+        float dmgPercentage = (1 - (data.elytraStatus / data.maxElytraStatus));
+        final int statusBar = posY - (int)(dmgPercentage * size);
+        context.fill(posX, posY, posX+2, statusBar, ColorHelper.Abgr.withAlpha(0xFF,data.elytraDmgColor));
+        float dmgPercentageLeft = 1 - dmgPercentage;
+        if(dmgPercentageLeft == 0) return;
+        context.fill(posX, statusBar, posX+2,statusBar - (int)(dmgPercentageLeft*size), 0xFF3D3D3D);
+        drawScaledItem(context,posX-3,posY-size-7,Items.ELYTRA,0.5f);
+    }
+    private void drawScaledItem(DrawContext context, int poxX, int posY, Item item, float scaled){
+        MatrixStack stack = context.getMatrices();
+        stack.push();
+        stack.translate(poxX,posY,0);
+        stack.scale(scaled,scaled,scaled);
+        stack.translate(-poxX,-posY,0);
+        context.drawItem(new ItemStack(item),poxX, posY);
+        stack.pop();
     }
     private void type(DrawContext graphics, String text, int centerX, int y, int color, MinecraftClient client) {
         MatrixStack stack = graphics.getMatrices();

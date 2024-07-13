@@ -17,12 +17,16 @@ import net.minecraft.util.math.ColorHelper;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
-
+/**
+ * Elytra rendering HUD
+ */
 public class ElytraHUD implements HudRenderCallback {
+    /**
+     * Elytra data that has all necessary data to render HUD
+     */
     public ElytraData data;
     private final Identifier elytraHudAssets = Identifier.of(TransportHud.MOD_ID, "textures/elytrahud.png");
     private double displaySpeed = 0.0d;
-
 
     public ElytraHUD(MinecraftClient client){
         data = new ElytraData(client);

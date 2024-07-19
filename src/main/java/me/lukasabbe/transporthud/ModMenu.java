@@ -20,7 +20,9 @@ public class ModMenu implements ModMenuApi {
                     .addEntry(entryBuilder.startIntField(Text.translatable("transporthud.option.delay.text"),Config.hudDelay)
                             .setDefaultValue(2).setSaveConsumer(newVal -> Config.hudDelay = newVal).build())
                     .addEntry(entryBuilder.startBooleanToggle(Text.translatable("transporthud.option.elytraDmgLvl.info"),Config.isElytraDmgStatusOn)
-                            .setDefaultValue(true).setSaveConsumer(newVal -> Config.isElytraDmgStatusOn = newVal).build());
+                            .setDefaultValue(true).setSaveConsumer(newVal -> Config.isElytraDmgStatusOn = newVal).build())
+                    .addEntry(entryBuilder.startBooleanToggle(Text.translatable("transporthud.option.coords.text"),Config.hudCords)
+                            .setDefaultValue(true).setSaveConsumer(newVal -> Config.hudCords = newVal).build());
             builder.setSavingRunnable(Config::save);
             return builder.build();
         };

@@ -18,6 +18,10 @@ public class Config {
      * The time it takes for the HUD to appear
      */
     public static int hudDelay = 2;
+    /**
+     * If hud coords is on or of
+     */
+    public static boolean hudCords = true;
 
     /**
      * Save config to properties file
@@ -29,6 +33,7 @@ public class Config {
             writer.write("enabled "+ isHudOn + "\n");
             writer.write("hudDelay " + hudDelay + "\n");
             writer.write("hasElytraStatus " + isElytraDmgStatusOn+"\n");
+            writer.write("hudCords" + hudCords+"\n");
             writer.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -54,6 +59,9 @@ public class Config {
             }
             if(properties.get("hasElytraStatus") instanceof String val){
                 isElytraDmgStatusOn = Boolean.parseBoolean(val);
+            }
+            if(properties.get("hudCords") instanceof String val){
+                hudCords = Boolean.parseBoolean(val);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -12,6 +12,9 @@ import net.minecraft.server.network.DebugInfoSender;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
+/**
+ * All data the HUD is using
+ */
 public class ElytraData {
     private MinecraftClient client;
     public boolean isFlying;

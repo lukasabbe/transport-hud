@@ -6,9 +6,22 @@ import java.io.*;
 import java.util.Properties;
 
 public class Config {
+    /**
+     * Is hud enabled
+     */
     public static boolean isHudOn = true;
+    /**
+     * Is Elytra Damage HUD stats enabled
+     */
     public static boolean isElytraDmgStatusOn = true;
+    /**
+     * The time it takes for the HUD to appear
+     */
     public static int hudDelay = 2;
+
+    /**
+     * Save config to properties file
+     */
     public static void save(){
         File saveFile = new File(FabricLoader.getInstance().getConfigDir().toFile(),"elytrahud.properties");
         try{
@@ -21,6 +34,10 @@ public class Config {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * Loads values from properties file to the static varietals
+     */
     public static void load(){
         File saveFile = new File(FabricLoader.getInstance().getConfigDir().toFile(),"elytrahud.properties");
         if(!saveFile.exists()) return;

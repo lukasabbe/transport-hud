@@ -23,4 +23,4 @@ Disable damage level for elytra (Default true)
 # Insparation
 Inspired by [Boat HUD](https://modrinth.com/mod/boathud)
 
-# [Download](https://modrinth.com/mod/simpleelytrahud/version/1.0.1)
+# [Download](https://modrinth.com/mod/simpleelytrahud/version/1.3)

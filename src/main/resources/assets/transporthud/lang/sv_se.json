@@ -4,5 +4,6 @@
   "transporthud.option.hud.info": "Stäng av eller på HUD",
   "transporthud.config.cat": "Kategori",
   "transporthud.option.delay.text": "Fördröjning innan HUD:en visas",
-  "transporthud.option.elytraDmgLvl.info": "Växla för att se elytrans förstörda nivå eller ej"
+  "transporthud.option.elytraDmgLvl.info": "Växla för att se elytrans förstörda nivå eller ej",
+  "transporthud.option.coords.text": "Stäng av eller på coords"
 }

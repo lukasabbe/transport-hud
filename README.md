@@ -24,4 +24,4 @@ Disable coordinates in the HUD (Default true)
 # Insparation
 Inspired by [Boat HUD](https://modrinth.com/mod/boathud)
 
-# [Download](https://modrinth.com/mod/simpleelytrahud/version/1.3)
+# [Download](https://modrinth.com/mod/simpleelytrahud/versions)

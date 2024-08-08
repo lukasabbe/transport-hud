@@ -19,8 +19,9 @@ Now supports [cloth-config](https://modrinth.com/mod/cloth-config) and [modmenu]
 Enable or disable the HUD from the config
 Delay for HUD to appear (Default 2s)
 Disable damage level for elytra (Default true)
+Disable coordinates in the HUD (Default true)
 ```
 # Insparation
 Inspired by [Boat HUD](https://modrinth.com/mod/boathud)
 
-# [Download](https://modrinth.com/mod/simpleelytrahud/version/1.3)
+# [Download](https://modrinth.com/mod/simpleelytrahud/versions)

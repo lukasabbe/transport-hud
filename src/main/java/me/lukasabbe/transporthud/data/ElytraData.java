@@ -1,15 +1,12 @@
 package me.lukasabbe.transporthud.data;
 
-import me.lukasabbe.transporthud.Config;
+import me.lukasabbe.transporthud.config.Config;
 import me.lukasabbe.transporthud.TransportHud;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.item.CompassAnglePredicateProvider;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.item.Items;
-import net.minecraft.server.network.DebugInfoSender;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
 /**

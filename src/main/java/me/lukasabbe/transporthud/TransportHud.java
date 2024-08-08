@@ -1,5 +1,6 @@
 package me.lukasabbe.transporthud;
 
+import me.lukasabbe.transporthud.config.Config;
 import me.lukasabbe.transporthud.huds.ElytraHUD;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;

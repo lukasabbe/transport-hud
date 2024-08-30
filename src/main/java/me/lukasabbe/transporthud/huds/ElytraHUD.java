@@ -7,6 +7,7 @@ import me.lukasabbe.transporthud.data.ElytraData;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.Item;
@@ -16,6 +17,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+
+import java.util.function.Function;
 
 /**
  * Elytra rendering HUD
@@ -31,7 +34,6 @@ public class ElytraHUD implements HudRenderCallback {
     public ElytraHUD(MinecraftClient client){
         data = new ElytraData(client);
     }
-
     @Override
     public void onHudRender(DrawContext drawContext, RenderTickCounter tickCounter) {
         if(!Config.isHudOn) return;
@@ -48,10 +50,9 @@ public class ElytraHUD implements HudRenderCallback {
 
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
-        drawContext.setShaderColor(1.0f,1.0f,1.0f,1.0f);
+        //drawContext.(1.0f,1.0f,1.0f,1.0f);
         //Draw blackplate
-        drawContext.drawTexture(elytraHudAssets,x-50,y-60,2,44,100,36);
-
+        drawContext.drawTexture(RenderLayer::getGuiTextured,elytraHudAssets,x-50,y-60,2,44,100,36,100,36,256,256);
         type(drawContext,String.format("%d°",(int)data.pitch),x-45, y-55,0xFFFFFF,client);
         type(drawContext,Math.round(displaySpeed*10.0)/10.0 + "km/h",x-45, y-45,0xFFFFFF,client);
         final Vec3d playerPos = client.player.getPos();
@@ -60,7 +61,7 @@ public class ElytraHUD implements HudRenderCallback {
 
         drawArrows(drawContext, data.pitch < 0, x+5, y-52);
         //compass
-        drawContext.drawTexture(elytraHudAssets,x+14,y-58,44,1,29,31);
+        drawContext.drawTexture(RenderLayer::getGuiTextured,elytraHudAssets,x+14,y-58,44,1,29,31,29,31,256,256);
         drawCompassArrow(drawContext,x+28,y-43);
         //DMG level
         if(Config.isElytraDmgStatusOn)
@@ -71,11 +72,11 @@ public class ElytraHUD implements HudRenderCallback {
 
     private void drawArrows(DrawContext context, boolean isGoingUp, int x, int upY){
         if(isGoingUp){
-            context.drawTexture(elytraHudAssets,x,upY,18,6,6,8);
-            context.drawTexture(elytraHudAssets,x,upY+10,28,16,6,8);
+            context.drawTexture(RenderLayer::getGuiTextured,elytraHudAssets,x,upY,18,6,6,8,6,8,256,256);
+            context.drawTexture(RenderLayer::getGuiTextured,elytraHudAssets,x,upY+10,28,16,6,8,6,8,256,256);
         }else{
-            context.drawTexture(elytraHudAssets,x,upY,18,16,6,8);
-            context.drawTexture(elytraHudAssets,x,upY+10,28,6,6,8);
+            context.drawTexture(RenderLayer::getGuiTextured,elytraHudAssets,x,upY,18,16,6,8,6,8,256,256);
+            context.drawTexture(RenderLayer::getGuiTextured,elytraHudAssets,x,upY+10,28,6,6,8,6,8,256,256);
         }
     }
     private void drawCompassArrow(DrawContext context, int posX, int posY){
@@ -83,13 +84,13 @@ public class ElytraHUD implements HudRenderCallback {
         for(int i = 0; i<radius;i++){
             int x = (int) (i*Math.cos(Math.toRadians(data.yaw)) + posX);
             int y = (int) (i*Math.sin(Math.toRadians(data.yaw)) + posY);
-            context.drawTexture(elytraHudAssets,x,y,77,12,1,1);
+            context.drawTexture(RenderLayer::getGuiTextured,elytraHudAssets,x,y,77,12,1,1,1,1,256,256);
         }
     }
     private void drawElytraStatus(DrawContext context, int posX, int posY, int size){
         float dmgPercentage = (1 - (data.elytraStatus / data.maxElytraStatus));
         final int statusBar = posY - (int)(dmgPercentage * size);
-        context.fill(posX, posY, posX+2, statusBar, ColorHelper.Abgr.withAlpha(0xFF,data.elytraDmgColor));
+        context.fill(posX, posY, posX+2, statusBar, ColorHelper.withAlpha(0xFF,data.elytraDmgColor));
         float dmgPercentageLeft = 1 - dmgPercentage;
         if(dmgPercentageLeft == 0) return;
         context.fill(posX, statusBar, posX+2,statusBar - (int)(dmgPercentageLeft*size), 0xFF3D3D3D);

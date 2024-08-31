@@ -32,6 +32,12 @@ To be able to edit the config, you need thees mods.
 > - Elytra status — You can turn of the damage level for elytra in the HUD
 > - Elyta coordinates — If you want, you can disable coordinates in the HUD
 
+# Looking for a server?
+Get BisectHosting and save 25% off for new customers using code Lukas at checkout.
+Thanks for your support — it helps me develop this and other mods I make!
+#ad
+[![Support me](https://www.bisecthosting.com/partners/custom-banners/ca44e941-2306-414c-8c65-7c50bc6fcf48.webp)](https://bisecthosting.com/Lukas)
+
 # How to download?
 ### With launcher (recommended)
 1. Download [Modrinth launcher](https://modrinth.com/app) (more user-friendly) or [Prism launcher](https://prismlauncher.org/) (A lot more options but harder to use for someone new)

@@ -1,8 +1,3 @@
-# Automatically build the project and run any configured tests for every push
-# and submitted pull request. This can help catch issues that only occur on
-# certain platforms or Java versions, and provides a first line of defence
-# against bad commits.
-
 name: build
 on: [pull_request, push]
 
@@ -35,3 +30,8 @@ jobs:
         with:
           name: Artifacts
           path: build/libs/
+      - name: Upload artifacts to discord
+        uses: tsickert/discord-webhook@v6.0.0
+        with:
+          webhook-url: ${{ secrets.WEBHOOK_URL }}
+          filename: build/libs/TransportHud-!(*-@(dev|sources|javadoc)).jar

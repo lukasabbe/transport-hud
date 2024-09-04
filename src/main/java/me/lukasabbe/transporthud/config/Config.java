@@ -1,4 +1,4 @@
-package me.lukasabbe.transporthud;
+package me.lukasabbe.transporthud.config;
 
 import net.fabricmc.loader.api.FabricLoader;
 

@@ -1,7 +1,7 @@
 package me.lukasabbe.transporthud.huds;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import me.lukasabbe.transporthud.Config;
+import me.lukasabbe.transporthud.config.Config;
 import me.lukasabbe.transporthud.TransportHud;
 import me.lukasabbe.transporthud.data.ElytraData;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
@@ -48,25 +48,42 @@ public class ElytraHUD implements HudRenderCallback {
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
         drawContext.setShaderColor(1.0f,1.0f,1.0f,1.0f);
+
         //Draw blackplate
         drawContext.drawTexture(elytraHudAssets,x-50,y-60,2,44,100,36);
 
-        type(drawContext,String.format("%d°",(int)data.pitch),x-45, y-55,0xFFFFFF,client);
-        type(drawContext,Math.round(displaySpeed*10.0)/10.0 + "km/h",x-45, y-45,0xFFFFFF,client);
+        //draws speed and pitch
+        type(drawContext,String.format("%d°",(int)data.pitch),x-45, y-55,0xFFFFFF,client,0.6f);
+        type(drawContext,Math.round(displaySpeed*10.0)/10.0 + "km/h",x-45, y-45,0xFFFFFF,client,0.6f);
+
+        //draw cords
         final Vec3d playerPos = client.player.getPos();
         if(Config.hudCords)
-            type(drawContext,String.format("%d:%d:%d", (int)playerPos.x, (int)playerPos.y, (int)playerPos.z),x-45, y-35,0xFFFFFF,client);
+            drawCords(drawContext,playerPos,x-45, y-35,client);
 
+        //draws arrows
         drawArrows(drawContext, data.pitch < 0, x+5, y-52);
+
         //compass
         drawContext.drawTexture(elytraHudAssets,x+14,y-58,44,1,29,31);
         drawCompassArrow(drawContext,x+28,y-43);
+
         //DMG level
         if(Config.isElytraDmgStatusOn)
             drawElytraStatus(drawContext, x-2, y-31,17);
 
         RenderSystem.disableBlend();
     }
+
+    private void drawCords(DrawContext ctx, Vec3d pos, int x, int y, MinecraftClient client){
+        String cordsText = String.format("%d:%d:%d", (int)pos.x, (int)pos.y, (int)pos.z);
+        if(cordsText.length() > 10){
+            type(ctx,cordsText,x,y,0xFFFFFF, client, ((float) (10 * 7 - ((cordsText.length()-4)*2)) / 100));
+        }else{
+            type(ctx,cordsText,x,y,0xFFFFFF, client, 0.6f);
+        }
+    }
+
 
     private void drawArrows(DrawContext context, boolean isGoingUp, int x, int upY){
         if(isGoingUp){
@@ -103,11 +120,11 @@ public class ElytraHUD implements HudRenderCallback {
         context.drawItem(new ItemStack(item),poxX, posY);
         stack.pop();
     }
-    private void type(DrawContext graphics, String text, int centerX, int y, int color, MinecraftClient client) {
+    private void type(DrawContext graphics, String text, int centerX, int y, int color, MinecraftClient client, float scaled) {
         MatrixStack stack = graphics.getMatrices();
         stack.push();
         stack.translate(centerX,y,0);
-        stack.scale(0.6f,0.6f,0.6f);
+        stack.scale(scaled,scaled,scaled);
         stack.translate(-centerX,-y,0);
         graphics.drawTextWithShadow(client.textRenderer,text, centerX, y,color);
         stack.pop();

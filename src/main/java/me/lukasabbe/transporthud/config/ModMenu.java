@@ -1,4 +1,4 @@
-package me.lukasabbe.transporthud;
+package me.lukasabbe.transporthud.config;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;

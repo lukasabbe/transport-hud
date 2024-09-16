@@ -2,11 +2,16 @@ package me.lukasabbe.transporthud.data;
 
 import me.lukasabbe.transporthud.config.Config;
 import me.lukasabbe.transporthud.TransportHud;
+import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.ModContainer;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.item.Items;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import nl.enjarai.doabarrelroll.DoABarrelRollClient;
+
+import java.util.Optional;
 
 /**
  * All data the HUD is using

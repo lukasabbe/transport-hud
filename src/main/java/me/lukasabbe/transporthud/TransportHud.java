@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 public class TransportHud implements ClientModInitializer {
     public static String MOD_ID = "transporthud";
     public static Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+
     @Override
     public void onInitializeClient() {
         Config.load();

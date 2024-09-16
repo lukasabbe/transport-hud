@@ -3,6 +3,7 @@ package me.lukasabbe.transporthud;
 import me.lukasabbe.transporthud.config.Config;
 import me.lukasabbe.transporthud.huds.ElytraHUD;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import org.slf4j.Logger;
@@ -14,6 +15,8 @@ public class TransportHud implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         Config.load();
-        HudRenderCallback.EVENT.register(new ElytraHUD(MinecraftClient.getInstance()));
+        final ElytraHUD listener = new ElytraHUD(MinecraftClient.getInstance());
+        HudRenderCallback.EVENT.register(listener);
+        ClientTickEvents.END_CLIENT_TICK.register((client) -> listener.data.updateData());
     }
 }

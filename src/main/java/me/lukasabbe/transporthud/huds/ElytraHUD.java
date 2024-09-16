@@ -18,8 +18,6 @@ import net.minecraft.util.math.ColorHelper;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
-import java.util.function.Function;
-
 /**
  * Elytra rendering HUD
  */
@@ -30,21 +28,23 @@ public class ElytraHUD implements HudRenderCallback {
     public ElytraData data;
     private final Identifier elytraHudAssets = Identifier.of(TransportHud.MOD_ID, "textures/elytrahud.png");
     private double displaySpeed = 0.0d;
+    private final MinecraftClient client;
 
     public ElytraHUD(MinecraftClient client){
         data = new ElytraData(client);
+        this.client = client;
     }
     @Override
     public void onHudRender(DrawContext drawContext, RenderTickCounter tickCounter) {
         if(!Config.isHudOn) return;
         if(!data.isFlying) return;
-        MinecraftClient client = MinecraftClient.getInstance();
         if(client.options.hudHidden) return;
-        if(client == null) return;
+
         int screenWidth = client.getWindow().getScaledWidth();
         int screenHeight = client.getWindow().getScaledHeight();
         displaySpeed = MathHelper.lerp(tickCounter.getTickDelta(true), displaySpeed, data.speed);
 
+        //Creates pos for HUD
         int x = screenWidth / 2;
         int y = screenHeight - 25;
 
@@ -97,13 +97,26 @@ public class ElytraHUD implements HudRenderCallback {
         }
     }
     private void drawCompassArrow(DrawContext context, int posX, int posY){
-        int radius = 5;
-        for(int i = 0; i<radius;i++){
-            int x = (int) (i*Math.cos(Math.toRadians(data.yaw)) + posX);
-            int y = (int) (i*Math.sin(Math.toRadians(data.yaw)) + posY);
+        final int radius = 5;
+        final float cos = MathHelper.cos((float) Math.toRadians(data.yaw));
+        final float sin = MathHelper.sin((float) Math.toRadians(data.yaw));
+        int x = Math.round(radius * cos + posX);
+        int y = Math.round(radius * sin + posY);
+        drawLine(context,posX, posY, x, y, radius);
+    }
+
+    private void drawLine(DrawContext context, int posX, int posY, int pos2x, int pos2y, int points){
+        for(int i = 0 ; i<points; i++){
+            int x = MathHelper.lerp(
+                    MathHelper.map(i,0,points,0,1),
+                    posX,pos2x);
+            int y = MathHelper.lerp(
+                    MathHelper.map(i,0,points,0,1),
+                    posY,pos2y);
             context.drawTexture(RenderLayer::getGuiTextured,elytraHudAssets,x,y,77,12,1,1,1,1,256,256);
         }
     }
+
     private void drawElytraStatus(DrawContext context, int posX, int posY, int size){
         float dmgPercentage = (1 - (data.elytraStatus / data.maxElytraStatus));
         final int statusBar = posY - (int)(dmgPercentage * size);
@@ -119,7 +132,7 @@ public class ElytraHUD implements HudRenderCallback {
         stack.translate(poxX,posY,0);
         stack.scale(scaled,scaled,scaled);
         stack.translate(-poxX,-posY,0);
-        context.drawItem(new ItemStack(item),poxX, posY);
+        context.drawItem(item.getDefaultStack(),poxX, posY);
         stack.pop();
     }
     private void type(DrawContext graphics, String text, int centerX, int y, int color, MinecraftClient client, float scaled) {

@@ -114,7 +114,7 @@ public class ElytraHUD implements HudRenderCallback {
             int y = MathHelper.lerp(
                     MathHelper.map(i,0,points,0,1),
                     posY,pos2y);
-            context.drawTexture(RenderLayer::getGuiTextured,elytraHudAssets,x,y,77,12,1,1,1,1,256,256);
+            context.drawTexture(elytraHudAssets,x,y,77,12,1,1);
         }
     }
 

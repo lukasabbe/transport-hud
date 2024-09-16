@@ -119,13 +119,13 @@ public class ElytraHUD implements HudRenderCallback {
     }
 
     private void drawElytraStatus(DrawContext context, int posX, int posY, int size){
+        drawScaledItem(context,posX-3,posY-size-7,Items.ELYTRA,0.5f);
         float dmgPercentage = (1 - (data.elytraStatus / data.maxElytraStatus));
         final int statusBar = posY - (int)(dmgPercentage * size);
         context.fill(posX, posY, posX+2, statusBar, ColorHelper.Abgr.withAlpha(0xFF,data.elytraDmgColor));
         float dmgPercentageLeft = 1 - dmgPercentage;
         if(dmgPercentageLeft == 0) return;
         context.fill(posX, statusBar, posX+2,statusBar - (int)(dmgPercentageLeft*size), 0xFF3D3D3D);
-        drawScaledItem(context,posX-3,posY-size-7,Items.ELYTRA,0.5f);
     }
     private void drawScaledItem(DrawContext context, int poxX, int posY, Item item, float scaled){
         MatrixStack stack = context.getMatrices();

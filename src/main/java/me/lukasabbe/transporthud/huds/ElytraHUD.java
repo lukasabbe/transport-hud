@@ -11,7 +11,6 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
@@ -113,18 +112,22 @@ public class ElytraHUD implements HudRenderCallback {
             int y = MathHelper.lerp(
                     MathHelper.map(i,0,points,0,1),
                     posY,pos2y);
+<<<<<<< 1.21.2
             context.drawTexture(RenderLayer::getGuiTextured,elytraHudAssets,x,y,77,12,1,1,1,1,256,256);
+=======
+            context.drawTexture(elytraHudAssets,x,y,77,12,1,1);
+>>>>>>> main
         }
     }
 
     private void drawElytraStatus(DrawContext context, int posX, int posY, int size){
+        drawScaledItem(context,posX-3,posY-size-7,Items.ELYTRA,0.5f);
         float dmgPercentage = (1 - (data.elytraStatus / data.maxElytraStatus));
         final int statusBar = posY - (int)(dmgPercentage * size);
         context.fill(posX, posY, posX+2, statusBar, ColorHelper.withAlpha(0xFF,data.elytraDmgColor));
         float dmgPercentageLeft = 1 - dmgPercentage;
         if(dmgPercentageLeft == 0) return;
         context.fill(posX, statusBar, posX+2,statusBar - (int)(dmgPercentageLeft*size), 0xFF3D3D3D);
-        drawScaledItem(context,posX-3,posY-size-7,Items.ELYTRA,0.5f);
     }
     private void drawScaledItem(DrawContext context, int poxX, int posY, Item item, float scaled){
         MatrixStack stack = context.getMatrices();

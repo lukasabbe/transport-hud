@@ -2,10 +2,8 @@ package me.lukasabbe.transporthud.data;
 
 import me.lukasabbe.transporthud.config.Config;
 import me.lukasabbe.transporthud.TransportHud;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.world.ClientWorld;
 import net.minecraft.item.Items;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -38,7 +36,11 @@ public class ElytraData {
         ClientPlayerEntity player = client.player;
         if(player == null) return;
 
+<<<<<<< 1.21.2
         if(!player.isGliding()|| !player.getInventory().getArmorStack(2).isOf(Items.ELYTRA)){
+=======
+        if(!player.isFallFlying() || !player.getInventory().getArmorStack(2).isOf(Items.ELYTRA)){
+>>>>>>> main
             counter = 0;
             isFlying=false;
             return;

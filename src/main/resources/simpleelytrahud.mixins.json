@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "me.lukasabbe.simpleelytrahud.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "simpleelytrahud.refmap.json",
+  "mixins": [
+  ],
+  "client": [
+    "InGameHud"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -4,7 +4,6 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import me.lukasabbe.simpleelytrahud.config.Config;
 import me.lukasabbe.simpleelytrahud.SimpleElytraHudMod;
 import me.lukasabbe.simpleelytrahud.data.ElytraData;
-import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.RenderTickCounter;
@@ -19,7 +18,7 @@ import net.minecraft.util.math.Vec3d;
 /**
  * Elytra rendering HUD
  */
-public class ElytraHUD implements HudRenderCallback {
+public class ElytraHUD {
     /**
      * Elytra data that has all necessary data to render HUD
      */
@@ -33,9 +32,9 @@ public class ElytraHUD implements HudRenderCallback {
         this.client = client;
     }
 
-    @Override
-    public void onHudRender(DrawContext drawContext, RenderTickCounter tickCounter) {
-        if(!Config.isHudOn) return;
+    public void hudRender(DrawContext drawContext, RenderTickCounter tickCounter) {
+        final Config config = Config.HANDLER.instance();
+        if(!config.isHudOn) return;
         if(!data.isFlying) return;
         if(client.options.hudHidden) return;
 
@@ -60,7 +59,7 @@ public class ElytraHUD implements HudRenderCallback {
 
         //draw cords
         final Vec3d playerPos = client.player.getPos();
-        if(Config.hudCords)
+        if(config.hudCords)
             drawCords(drawContext,playerPos,x-45, y-35,client);
 
         //draws arrows
@@ -71,7 +70,7 @@ public class ElytraHUD implements HudRenderCallback {
         drawCompassArrow(drawContext,x+28,y-43);
 
         //DMG level
-        if(Config.isElytraDmgStatusOn)
+        if(config.isElytraDmgStatusOn)
             drawElytraStatus(drawContext, x-2, y-31,17);
 
         RenderSystem.disableBlend();

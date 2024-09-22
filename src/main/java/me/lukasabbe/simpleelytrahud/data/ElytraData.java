@@ -42,7 +42,7 @@ public class ElytraData {
             return;
         }
         //Hud delay is in sec times ticks. 20 ticks in 1 sec
-        if(counter > Config.hudDelay * 20){
+        if(counter > Config.HANDLER.instance().hudDelay * 20){
             isFlying = true;
             speed = (float) (player.getVelocity().length() * 20d);
             postion = player.getPos();

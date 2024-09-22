@@ -1,9 +1,9 @@
-package me.lukasabbe.transporthud.huds;
+package me.lukasabbe.simpleelytrahud.huds;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import me.lukasabbe.transporthud.config.Config;
-import me.lukasabbe.transporthud.TransportHud;
-import me.lukasabbe.transporthud.data.ElytraData;
+import me.lukasabbe.simpleelytrahud.config.Config;
+import me.lukasabbe.simpleelytrahud.SimpleElytraHudMod;
+import me.lukasabbe.simpleelytrahud.data.ElytraData;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
@@ -24,7 +24,7 @@ public class ElytraHUD implements HudRenderCallback {
      * Elytra data that has all necessary data to render HUD
      */
     public ElytraData data;
-    private final Identifier elytraHudAssets = Identifier.of(TransportHud.MOD_ID, "textures/elytrahud.png");
+    private final Identifier elytraHudAssets = Identifier.of(SimpleElytraHudMod.MOD_ID, "textures/elytrahud.png");
     private double displaySpeed = 0.0d;
     private final MinecraftClient client;
 

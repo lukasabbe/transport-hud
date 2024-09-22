@@ -1,4 +1,4 @@
-package me.lukasabbe.transporthud.config;
+package me.lukasabbe.simpleelytrahud.config;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

@@ -1,7 +1,7 @@
-package me.lukasabbe.transporthud;
+package me.lukasabbe.simpleelytrahud;
 
-import me.lukasabbe.transporthud.config.Config;
-import me.lukasabbe.transporthud.huds.ElytraHUD;
+import me.lukasabbe.simpleelytrahud.config.Config;
+import me.lukasabbe.simpleelytrahud.huds.ElytraHUD;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
@@ -9,8 +9,8 @@ import net.minecraft.client.MinecraftClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TransportHud implements ClientModInitializer {
-    public static String MOD_ID = "transporthud";
+public class SimpleElytraHudMod implements ClientModInitializer {
+    public static String MOD_ID = "simpleelytrahud";
     public static Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
     @Override
     public void onInitializeClient() {

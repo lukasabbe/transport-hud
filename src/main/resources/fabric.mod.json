@@ -1,26 +1,26 @@
 {
   "schemaVersion": 1,
-  "id": "transporthud",
+  "id": "simpleelytrahud",
   "version": "${version}",
-  "name": "TransportHud",
-  "description": "",
+  "name": "SimpleElytraHud",
+  "description": "An elytra HUD mod",
   "authors": ["Lukasabbe"],
   "contact": {
     "repo": "https://github.com/lukasabbe/TransportHud"
   },
   "license": "MIT",
-  "icon": "assets/transporthud/icon.png",
+  "icon": "assets/simpleelytrahud/icon.png",
   "environment": "client",
   "entrypoints": {
     "client": [
-      "me.lukasabbe.transporthud.TransportHud"
+      "me.lukasabbe.simpleelytrahud.SimpleElytraHudMod"
     ],
     "modmenu": [
-      "me.lukasabbe.transporthud.config.ModMenu"
+      "me.lukasabbe.simpleelytrahud.config.ModMenu"
     ]
   },
   "mixins": [
-    "transporthud.mixins.json"
+    "simpleelytrahud.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",

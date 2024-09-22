@@ -1,7 +1,7 @@
-package me.lukasabbe.transporthud.data;
+package me.lukasabbe.simpleelytrahud.data;
 
-import me.lukasabbe.transporthud.config.Config;
-import me.lukasabbe.transporthud.TransportHud;
+import me.lukasabbe.simpleelytrahud.SimpleElytraHudMod;
+import me.lukasabbe.simpleelytrahud.config.Config;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.item.Items;
@@ -25,7 +25,7 @@ public class ElytraData {
 
     public ElytraData(MinecraftClient client){
         if(client == null)
-            TransportHud.LOGGER.error("There were no client");
+            SimpleElytraHudMod.LOGGER.error("There were no client");
         this.client = client;
     }
 

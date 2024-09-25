@@ -1,7 +1,7 @@
-package me.lukasabbe.transporthud.data;
+package me.lukasabbe.simpleelytrahud.data;
 
-import me.lukasabbe.transporthud.config.Config;
-import me.lukasabbe.transporthud.TransportHud;
+import me.lukasabbe.simpleelytrahud.SimpleElytraHudMod;
+import me.lukasabbe.simpleelytrahud.config.Config;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.item.Items;
@@ -25,7 +25,7 @@ public class ElytraData {
 
     public ElytraData(MinecraftClient client){
         if(client == null)
-            TransportHud.LOGGER.error("There were no client");
+            SimpleElytraHudMod.LOGGER.error("There were no client");
         this.client = client;
     }
 
@@ -35,13 +35,14 @@ public class ElytraData {
     public void updateData(){
         ClientPlayerEntity player = client.player;
         if(player == null) return;
-        if(!player.isGliding()|| !player.getInventory().getArmorStack(2).isOf(Items.ELYTRA)){
+
+        if(!player.isFallFlying() || !player.getInventory().getArmorStack(2).isOf(Items.ELYTRA)){
             counter = 0;
             isFlying=false;
             return;
         }
         //Hud delay is in sec times ticks. 20 ticks in 1 sec
-        if(counter > Config.hudDelay * 20){
+        if(counter > Config.HANDLER.instance().hudDelay * 20){
             isFlying = true;
             speed = (float) (player.getVelocity().length() * 20d);
             postion = player.getPos();

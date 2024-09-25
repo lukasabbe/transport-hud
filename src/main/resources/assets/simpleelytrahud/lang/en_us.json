@@ -1,0 +1,17 @@
+{
+  "simpleelytrahud.config.title": "Elytra HUD options",
+  "simpleelytrahud.config.cat": "Elytra options category",
+  "simpleelytrahud.option.hud_toggle.info": "Toggle mod",
+  "simpleelytrahud.option.hud_toggle.description": "By toggling this you will turn of the HUD",
+  "simpleelytrahud.option.delay.info": "Delay HUDs displaying",
+  "simpleelytrahud.option.delay.description": "Change the time it takes for the HUD to appear",
+  "simpleelytrahud.option.elytra_damage_level_toggle.info": "Toggle damages lvl",
+  "simpleelytrahud.option.elytra_damage_level.description": "Turn of the display for the Elytras damage level",
+  "simpleelytrahud.option.coordinates_toggle.info": "Toggle coordinates",
+  "simpleelytrahud.option.coordinates_toggle.description": "Toggle so you can't see the coordinates anymore",
+  "simpleelytrahud.option.speed.info": "Change speed measurement",
+  "simpleelytrahud.option.speed.description": "Change between the speed measurement. To the one you like",
+  "simpleelytrahud.option.speed.options.km":"km/h",
+  "simpleelytrahud.option.speed.options.m":"m/s",
+  "simpleelytrahud.option.speed.options.mph":"mph"
+}

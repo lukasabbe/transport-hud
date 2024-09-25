@@ -2,7 +2,7 @@
 ![Flying with an elytra with the hud up](https://cdn.modrinth.com/data/cached_images/050acab9f4ab75f1117c5357e6914d76c1707a8e.png)
 
 ## Information
-Elytra Hud add in a new way to fly with you elytra.
+Elytra Hud add a new way to fly with your elytra.
 It adds important information on the screen while flying.
 Use this mod for your long flights to get the most out of the trip
 
@@ -21,9 +21,7 @@ Use this mod for your long flights to get the most out of the trip
 > #### Right side
 > On the right side you have a compass. This is not a normal compass, because it will always point towards the direction you are going
 # Config
-The mod supports [cloth-config](https://modrinth.com/mod/cloth-config) and [modmenu](https://modrinth.com/mod/modmenu).
-
-To be able to edit the config, you need thees mods. 
+The mod requires [YetAnotherConfigLib](https://modrinth.com/mod/yacl) and [modmenu](https://modrinth.com/mod/modmenu).
 
 > #### Config Options
 > They are in order in the config menu.
@@ -31,6 +29,7 @@ To be able to edit the config, you need thees mods.
 > - Hud's delay — The time it takes for the hud to appear.
 > - Elytra status — You can turn of the damage level for elytra in the HUD
 > - Elyta coordinates — If you want, you can disable coordinates in the HUD
+> - Speed measurement — There is km/h (default), m/s or mph available
 
 # Looking for a server?
 Get BisectHosting and save 25% off for new customers using code Lukas at checkout.
@@ -45,12 +44,12 @@ Thanks for your support — it helps me develop this and other mods I make!
 3. You can download the mod in the launcher
    4. (Modrinth launcher) In your profile in the right corner, press "Add content" and search up "Simple Elytra Hud" and press "install."
    5. (Prism launcher) Go in to the profile by pressing "edit" and then you want and press "Mods" and then "Download mods". Under the Modrinth tab write "Simple Elytra Hud". Mark for download and then press confirm.
-   6. (Optional) You can add modmenu and cloth config in the same way!
+   6. You need modmenu and YetAnotherConfigLib. Download it in the same way!
 4. Now you can start your profile and enjoy!
 ### Without launcher
 1. You can download the mod here on [Modrinth](https://modrinth.com/mod/simpleelytrahud/versions) or [Github](https://github.com/lukasabbe/transport-hud/releases)
 2. You also need to download [Fabric API](https://modrinth.com/mod/fabric-api/versions)
-3.  (Optional) If you want the config, you also need [Mod Menu](https://modrinth.com/mod/modmenu) and [Cloth Config](https://modrinth.com/mod/cloth-config)
+3. You also need [Mod Menu](https://modrinth.com/mod/modmenu) and [YetAnotherConfigLib](https://modrinth.com/mod/yacl) (Versions bellow and 1.6 use and its optional [cloth config](https://modrinth.com/mod/cloth-config))
 4. You also need [fabric](https://fabricmc.net/use/installer/) and this will automatically create a profile for you
 5. Put the mods in %appdata%/.minecraft/mods
 6. Now you can play Minecraft

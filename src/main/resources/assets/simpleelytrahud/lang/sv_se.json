@@ -1,0 +1,17 @@
+{
+  "simpleelytrahud.config.title": "Elytra inställningar",
+  "simpleelytrahud.config.cat": "Elytra HUD kategori",
+  "simpleelytrahud.option.hud_toggle.info": "Växla status mod",
+  "simpleelytrahud.option.hud_toggle.description": "Gennom att växla av moddet så kommer du inte see HUD:en längre",
+  "simpleelytrahud.option.delay.info": "Tid tills HUD visas",
+  "simpleelytrahud.option.delay.description": "Tiden det tar för HUD:en ska visas",
+  "simpleelytrahud.option.elytra_damage_level_toggle.info": "Växla av skada nivån",
+  "simpleelytrahud.option.elytra_damage_level.description": "Växla av/på för att se hur mycket skada din elytra har tagit",
+  "simpleelytrahud.option.coordinates_toggle.info": "Växla koordinater",
+  "simpleelytrahud.option.coordinates_toggle.description": "Växla av/på för att ha koordinater på HUD:en",
+  "simpleelytrahud.option.speed.info": "Ändra hastighetsmått",
+  "simpleelytrahud.option.speed.description": "Ändra ditt hastighetsmått",
+  "simpleelytrahud.option.speed.options.km":"km/h",
+  "simpleelytrahud.option.speed.options.m":"m/s",
+  "simpleelytrahud.option.speed.options.mph":"mph"
+}

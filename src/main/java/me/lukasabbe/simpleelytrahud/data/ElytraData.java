@@ -35,7 +35,8 @@ public class ElytraData {
     public void updateData(){
         ClientPlayerEntity player = client.player;
         if(player == null) return;
-        if(!player.isGliding()|| !player.getInventory().getArmorStack(2).isOf(Items.ELYTRA)){
+
+        if(!player.isFallFlying() || !player.getInventory().getArmorStack(2).isOf(Items.ELYTRA)){
             counter = 0;
             isFlying=false;
             return;

@@ -1,12 +1,13 @@
 package me.lukasabbe.simpleelytrahud.huds;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import me.lukasabbe.simpleelytrahud.config.Config;
-import me.lukasabbe.simpleelytrahud.SimpleElytraHudMod;
-import me.lukasabbe.simpleelytrahud.config.SpeedEnum;
+import me.lukasabbe.transporthud.config.Config;
+import me.lukasabbe.transporthud.TransportHud;
 import me.lukasabbe.simpleelytrahud.data.ElytraData;
+import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.Item;
@@ -19,12 +20,12 @@ import net.minecraft.util.math.Vec3d;
 /**
  * Elytra rendering HUD
  */
-public class ElytraHUD {
+public class ElytraHUD implements HudRenderCallback {
     /**
      * Elytra data that has all necessary data to render HUD
      */
     public ElytraData data;
-    private final Identifier elytraHudAssets = Identifier.of(SimpleElytraHudMod.MOD_ID, "textures/elytrahud.png");
+    private final Identifier elytraHudAssets = Identifier.of(TransportHud.MOD_ID, "textures/elytrahud.png");
     private double displaySpeed = 0.0d;
     private final MinecraftClient client;
 
@@ -32,10 +33,9 @@ public class ElytraHUD {
         data = new ElytraData(client);
         this.client = client;
     }
-
-    public void hudRender(DrawContext drawContext, RenderTickCounter tickCounter) {
-        final Config config = Config.HANDLER.instance();
-        if(!config.isHudOn) return;
+    @Override
+    public void onHudRender(DrawContext drawContext, RenderTickCounter tickCounter) {
+        if(!Config.isHudOn) return;
         if(!data.isFlying) return;
         if(client.options.hudHidden) return;
 
@@ -49,29 +49,28 @@ public class ElytraHUD {
 
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
-        drawContext.setShaderColor(1.0f,1.0f,1.0f,1.0f);
 
         //Draw blackplate
-        drawContext.drawTexture(elytraHudAssets,x-50,y-60,2,44,100,36);
+        drawContext.drawTexture(RenderLayer::getGuiTextured,elytraHudAssets,x-50,y-60,2,44,100,36,100,36,256,256);
 
         //draws speed and pitch
         type(drawContext,String.format("%d°",(int)data.pitch),x-45, y-55,0xFFFFFF,client,0.6f);
-        typeSpeed(drawContext, x,y,0xFFFFFF);
+        type(drawContext,Math.round(displaySpeed*10.0)/10.0 + "km/h",x-45, y-45,0xFFFFFF,client,0.6f);
 
         //draw cords
         final Vec3d playerPos = client.player.getPos();
-        if(config.hudCords)
+        if(Config.hudCords)
             drawCords(drawContext,playerPos,x-45, y-35,client);
 
         //draws arrows
         drawArrows(drawContext, data.pitch < 0, x+5, y-52);
 
         //compass
-        drawContext.drawTexture(elytraHudAssets,x+14,y-58,44,1,29,31);
+        drawContext.drawTexture(RenderLayer::getGuiTextured,elytraHudAssets,x+14,y-58,44,1,29,31,29,31,256,256);
         drawCompassArrow(drawContext,x+28,y-43);
 
         //DMG level
-        if(config.isElytraDmgStatusOn)
+        if(Config.isElytraDmgStatusOn)
             drawElytraStatus(drawContext, x-2, y-31,17);
 
         RenderSystem.disableBlend();
@@ -89,11 +88,11 @@ public class ElytraHUD {
 
     private void drawArrows(DrawContext context, boolean isGoingUp, int x, int upY){
         if(isGoingUp){
-            context.drawTexture(elytraHudAssets,x,upY,18,6,6,8);
-            context.drawTexture(elytraHudAssets,x,upY+10,28,16,6,8);
+            context.drawTexture(RenderLayer::getGuiTextured,elytraHudAssets,x,upY,18,6,6,8,6,8,256,256);
+            context.drawTexture(RenderLayer::getGuiTextured,elytraHudAssets,x,upY+10,28,16,6,8,6,8,256,256);
         }else{
-            context.drawTexture(elytraHudAssets,x,upY,18,16,6,8);
-            context.drawTexture(elytraHudAssets,x,upY+10,28,6,6,8);
+            context.drawTexture(RenderLayer::getGuiTextured,elytraHudAssets,x,upY,18,16,6,8,6,8,256,256);
+            context.drawTexture(RenderLayer::getGuiTextured,elytraHudAssets,x,upY+10,28,6,6,8,6,8,256,256);
         }
     }
     private void drawCompassArrow(DrawContext context, int posX, int posY){
@@ -113,7 +112,7 @@ public class ElytraHUD {
             int y = MathHelper.lerp(
                     MathHelper.map(i,0,points,0,1),
                     posY,pos2y);
-            context.drawTexture(elytraHudAssets,x,y,77,12,1,1);
+            context.drawTexture(RenderLayer::getGuiTextured,elytraHudAssets,x,y,77,12,1,1,1,1,256,256);
         }
     }
 
@@ -121,7 +120,7 @@ public class ElytraHUD {
         drawScaledItem(context,posX-3,posY-size-7,Items.ELYTRA,0.5f);
         float dmgPercentage = (1 - (data.elytraStatus / data.maxElytraStatus));
         final int statusBar = posY - (int)(dmgPercentage * size);
-        context.fill(posX, posY, posX+2, statusBar, ColorHelper.Abgr.withAlpha(0xFF,data.elytraDmgColor));
+        context.fill(posX, posY, posX+2, statusBar, ColorHelper.withAlpha(0xFF,data.elytraDmgColor));
         float dmgPercentageLeft = 1 - dmgPercentage;
         if(dmgPercentageLeft == 0) return;
         context.fill(posX, statusBar, posX+2,statusBar - (int)(dmgPercentageLeft*size), 0xFF3D3D3D);
@@ -143,16 +142,5 @@ public class ElytraHUD {
         stack.translate(-centerX,-y,0);
         graphics.drawTextWithShadow(client.textRenderer,text, centerX, y,color);
         stack.pop();
-    }
-
-    private void typeSpeed(DrawContext context, int x, int y, int color){
-        double speed = data.speed;
-        final SpeedEnum speedEnum = Config.HANDLER.instance().speedEnum;
-        if(speedEnum == SpeedEnum.m){
-            speed = speed/3.6;
-        }else if(speedEnum == SpeedEnum.mph){
-            speed = speed*0.621371;
-        }
-        type(context,Math.round(speed*10.0)/10.0 + speedEnum.getDisplayName().getString(),x-45, y-45,0xFFFFFF,client,0.6f);
     }
 }

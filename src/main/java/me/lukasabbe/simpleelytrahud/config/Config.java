@@ -27,4 +27,7 @@ public class Config{
 
     @SerialEntry
     public boolean hudCords = true;
+
+    @SerialEntry
+    public SpeedEnum speedEnum = SpeedEnum.km;
 }
